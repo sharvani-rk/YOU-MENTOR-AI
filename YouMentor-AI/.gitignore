@@ -1,0 +1,7 @@
+.env
+backend/.env
+backend/venv/
+**/__pycache__/
+*.pyc
+backend/captured_audio/
+.DS_Store

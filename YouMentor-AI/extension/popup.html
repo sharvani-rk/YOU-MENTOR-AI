@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouMentor AI</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+<div class="container">
+  <header class="header">
+    <div class="logo">🎓</div>
+    <h1>YouMentor AI</h1>
+    <p>AI-Powered Multilingual Learning Assistant</p>
+  </header>
+
+  <section class="agent-actions">
+    <button id="summaryBtn" class="main-btn">📄 Generate Summary</button>
+    <button id="explainBtn" class="main-btn">💡 Explain</button>
+    <button id="quizBtn" class="main-btn">🎯 Take Quiz</button>
+    <button id="vocabularyBtn" class="main-btn">📚 Vocabulary</button>
+    <button id="flashcardsBtn" class="main-btn">🃏 Flashcards</button>
+  </section>
+
+  <section class="live-card">
+    <h2>🌍 Live Subtitles & AI Voice</h2>
+    <p class="muted">Start live listening once. Subtitles and AI voice work independently.</p>
+
+    <label for="subtitleLanguageSelect">Subtitle language</label>
+    <select id="subtitleLanguageSelect">
+      <option value="original">Auto-detect / Original</option>
+      <option value="none">No subtitles (voice only mode)</option>
+      <option value="en">English</option>
+      <option value="te">Telugu</option>
+      <option value="hi">Hindi</option>
+      <option value="ta">Tamil</option>
+      <option value="kn">Kannada</option>
+      <option value="ml">Malayalam</option>
+      <option value="mr">Marathi</option>
+      <option value="bn">Bengali</option>
+      <option value="gu">Gujarati</option>
+      <option value="pa">Punjabi</option>
+      <option value="hinglish">Hinglish</option>
+      <option value="tenglish">Tenglish</option>
+      <option value="benglish">Benglish</option>
+    </select>
+
+    <label for="audioLanguageSelect">AI voice language</label>
+    <select id="audioLanguageSelect">
+      <option value="none">AI voice off</option>
+      <option value="original">Original language</option>
+      <option value="en">English</option>
+      <option value="te">Telugu</option>
+      <option value="hi">Hindi</option>
+      <option value="ta">Tamil</option>
+      <option value="kn">Kannada</option>
+      <option value="ml">Malayalam</option>
+      <option value="mr">Marathi</option>
+      <option value="bn">Bengali</option>
+      <option value="gu">Gujarati</option>
+      <option value="pa">Punjabi</option>
+      <option value="hinglish">Hinglish</option>
+      <option value="tenglish">Tenglish</option>
+      <option value="benglish">Benglish</option>
+    </select>
+
+    <label for="voiceSelect">AI voice</label>
+    <select id="voiceSelect">
+      <option value="Avinash">Avinash</option>
+      <option value="Shubham">Shubham</option>
+      <option value="Prakash">Prakash</option>
+      <option value="Devansh">Devansh</option>
+      <option value="Yashraj">Yashraj</option>
+      <option value="Harshad">Harshad</option>
+      <option value="Shivani">Shivani</option>
+      <option value="Lakshmi">Lakshmi</option>
+      <option value="Kalpana">Kalpana</option>
+      <option value="Chetana">Chetana</option>
+      <option value="Vasudha">Vasudha</option>
+      <option value="Riyaa">Riyaa</option>
+      <option value="Tarika">Tarika</option>
+    </select>
+
+    <p class="hint">Choose an available provider voice. Voice characteristics should be verified by listening to samples.</p>
+
+    <div class="button-row">
+      <button id="startLiveSubtitlesBtn" class="main-btn start-btn">▶ Start Live Listening</button>
+      <button id="stopLiveSubtitlesBtn" class="main-btn stop-btn" disabled>■ Stop Everything</button>
+    </div>
+
+    <div class="button-row voice-button-row">
+      <button id="startLiveVoiceBtn" class="main-btn start-voice-btn" disabled>🔊 Start AI Voice</button>
+      <button id="stopLiveVoiceBtn" class="main-btn stop-btn" disabled>■ Stop AI Voice</button>
+    </div>
+
+    <p class="hint">Original YouTube audio stays on during listening. Start AI Voice to mute original playback and hear the selected translated voice. Stop AI Voice to restore original audio.</p>
+
+    <p id="liveSubtitleStatus" class="status" role="status" aria-live="polite">
+      Live listening stopped. Subtitles and AI voice are off.
+    </p>
+
+    <div class="transcript-panel">
+      <div class="panel-heading">
+        <strong>Live Transcript</strong>
+        <span id="liveSubtitleIndicator">READY</span>
+      </div>
+      <div id="liveTranscript" aria-live="polite">
+        Your recognised and translated speech will appear here.
+      </div>
+    </div>
+  </section>
+
+  <section class="audio-section">
+    <h2>🎙️ Audio Learning</h2>
+    <p>Upload audio to generate a transcript and summary.</p>
+
+    <label for="audioFile">Choose an audio file</label>
+    <input type="file" id="audioFile" accept=".wav,.mp3,.ogg,.flac,.aac,.m4a,audio/*">
+
+    <label for="languageSelect">Audio language</label>
+    <select id="languageSelect">
+      <option value="en-IN" selected>English (India)</option>
+      <option value="bn-IN">Bengali</option>
+      <option value="gu-IN">Gujarati</option>
+      <option value="hi-IN">Hindi</option>
+      <option value="kn-IN">Kannada</option>
+      <option value="ml-IN">Malayalam</option>
+      <option value="mr-IN">Marathi</option>
+      <option value="pa-IN">Punjabi</option>
+      <option value="ta-IN">Tamil</option>
+      <option value="te-IN">Telugu</option>
+    </select>
+
+    <button id="transcribeAudioBtn" class="main-btn">🎧 Transcribe & Summarize</button>
+    <p id="audioStatus" role="status"></p>
+    <div id="audioOutput"></div>
+  </section>
+
+  <div id="output"></div>
+  <button id="notesBtn" class="notes-btn">📚 My Notes</button>
+</div>
+
+<script type="module" src="popup.js"></script>
+</body>
+</html>
